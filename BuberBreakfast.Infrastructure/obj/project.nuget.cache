@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "UPJGgtfvXFxe+t5MhHAtUPnGeXNAIEDeMQ12JxDM6UBBAaPQ1YUwcDfJizYODsny8GEk9bntUiJ+M+j0TAK63Q==",
+  "success": true,
+  "projectFilePath": "D:\\projects\\BuberBreakfast\\BuberBreakfast.Infrastructure\\BuberBreakfast.Infrastructure.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sirpeace\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.1\\microsoft.extensions.dependencyinjection.abstractions.8.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
