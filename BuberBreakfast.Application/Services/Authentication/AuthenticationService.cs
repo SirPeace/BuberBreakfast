@@ -1,6 +1,8 @@
+using BuberBreakfast.Application.Common.Interfaces;
+
 namespace BuberBreakfast.Application.Services.Authentication;
 
-public class AuthenticationService : IAuthenticationService
+public class AuthenticationService(IJwtTokenGenerator jwtTokenGenerator) : IAuthenticationService
 {
     public AuthenticationResult Login(string email, string password)
     {
@@ -15,7 +17,10 @@ public class AuthenticationService : IAuthenticationService
         string password
     )
     {
+        var userId = Guid.NewGuid();
+        var token = jwtTokenGenerator.GenerateToken(userId, firstName, lastName);
+
         Console.WriteLine($"Registered as: {firstName} {lastName} + {email} + {password}");
-        return new AuthenticationResult(Guid.NewGuid(), firstName, lastName, email, "");
+        return new AuthenticationResult(userId, firstName, lastName, email, token);
     }
 }

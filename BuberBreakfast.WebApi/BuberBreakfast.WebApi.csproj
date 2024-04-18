@@ -1,19 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UserSecretsId>7ac29e51-fbb1-4160-9c6f-ef54ce11b328</UserSecretsId>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BuberBreakfast.Contracts\BuberBreakfast.Contracts.csproj" />
-    <ProjectReference Include="..\BuberBreakfast.Application\BuberBreakfast.Application.csproj" />
-    <ProjectReference Include="..\BuberBreakfast.Infrastructure\BuberBreakfast.Infrastructure.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\BuberBreakfast.Contracts\BuberBreakfast.Contracts.csproj"/>
+        <ProjectReference Include="..\BuberBreakfast.Application\BuberBreakfast.Application.csproj"/>
+        <ProjectReference Include="..\BuberBreakfast.Infrastructure\BuberBreakfast.Infrastructure.csproj"/>
+    </ItemGroup>
 
 </Project>
