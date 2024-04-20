@@ -6,19 +6,19 @@ namespace BuberBreakfast.WebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class AuthController(IAuthenticationService _authService) : ControllerBase
+public class AuthController(IAuthenticationService authService) : ControllerBase
 {
     [HttpPost("login")]
     public IActionResult Login(LoginRequest requestBody)
     {
-        var authResult = _authService.Login(requestBody.Email, requestBody.Password);
+        var (user, token) = authService.Login(requestBody.Email, requestBody.Password);
 
         var response = new AuthenticationResponse(
-            Id: authResult.Id,
-            FirstName: authResult.FirstName,
-            LastName: authResult.LastName,
-            Email: authResult.Email,
-            Token: authResult.Token
+            user.Id,
+            user.FirstName,
+            user.LastName,
+            user.Email,
+            token
         );
 
         return Ok(response);
@@ -27,7 +27,7 @@ public class AuthController(IAuthenticationService _authService) : ControllerBas
     [HttpPost("register")]
     public IActionResult Register(RegisterRequest requestBody)
     {
-        var authResult = _authService.Register(
+        var (user, token) = authService.Register(
             requestBody.FirstName,
             requestBody.LastName,
             requestBody.Email,
@@ -35,11 +35,11 @@ public class AuthController(IAuthenticationService _authService) : ControllerBas
         );
 
         var response = new AuthenticationResponse(
-            Id: authResult.Id,
-            FirstName: authResult.FirstName,
-            LastName: authResult.LastName,
-            Email: authResult.Email,
-            Token: authResult.Token
+            user.Id,
+            user.FirstName,
+            user.LastName,
+            user.Email,
+            token
         );
 
         return Ok(response);

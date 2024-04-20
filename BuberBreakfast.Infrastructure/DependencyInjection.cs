@@ -1,5 +1,7 @@
 using BuberBreakfast.Application.Common.Interfaces;
+using BuberBreakfast.Application.Common.Persistence;
 using BuberBreakfast.Infrastructure.Authentication;
+using BuberBreakfast.Infrastructure.Persistence;
 using BuberBreakfast.Infrastructure.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +19,8 @@ public static class DependencyInjection
 
         services
             .AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>()
-            .AddSingleton<IDateTimeProvider, DateTimeProvider>();
+            .AddSingleton<IDateTimeProvider, DateTimeProvider>()
+            .AddScoped<IUserRepository, UserRepository>();
 
         return services;
     }
