@@ -18,7 +18,7 @@ public class AuthenticationService(
         if (password != user.Password)
             throw new ArgumentException("Incorrect login/password.");
 
-        var token = jwtTokenGenerator.GenerateToken(user.Id, user.FirstName, user.LastName);
+        var token = jwtTokenGenerator.GenerateToken(user);
         Console.WriteLine($"Logged in as: {email}");
 
         return new AuthenticationResult(user, token);
@@ -44,11 +44,7 @@ public class AuthenticationService(
 
         userRepository.Add(newUser);
 
-        var token = jwtTokenGenerator.GenerateToken(
-            newUser.Id,
-            newUser.FirstName,
-            newUser.LastName
-        );
+        var token = jwtTokenGenerator.GenerateToken(newUser);
         Console.WriteLine($"Registered new user: {firstName} {lastName}, {email}");
 
         return new AuthenticationResult(newUser, token);
