@@ -1,5 +1,6 @@
 using BuberBreakfast.Application.Common.Interfaces;
 using BuberBreakfast.Application.Common.Persistence;
+using BuberBreakfast.Application.Errors.Authentication;
 using BuberBreakfast.Domain.Entities;
 
 namespace BuberBreakfast.Application.Services.Authentication;
@@ -13,10 +14,8 @@ public class AuthenticationService(
     {
         var user = userRepository.GetUserByEmail(email);
 
-        if (user is null)
-            throw new ArgumentException("Incorrect login/password.");
-        if (password != user.Password)
-            throw new ArgumentException("Incorrect login/password.");
+        if (user is null || password != user.Password)
+            throw new LoginAttemptWithInvalidCredentialsException();
 
         var token = jwtTokenGenerator.GenerateToken(user);
         Console.WriteLine($"Logged in as: {email}");
@@ -32,7 +31,7 @@ public class AuthenticationService(
     )
     {
         if (userRepository.GetUserByEmail(email) is not null)
-            throw new ArgumentException("User with provided email already exists.");
+            throw new RegistrationDuplicateEmailException();
 
         var newUser = new User
         {

@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using BuberBreakfast.Application.Errors;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Options;
@@ -96,8 +98,6 @@ public class ProblemDetailsFactory(
         if (traceId != null)
             problemDetails.Extensions["traceId"] = traceId;
 
-        AddApplicationProblemDetailsExtensions(problemDetails);
-
         _configure?.Invoke(
             new ProblemDetailsContext
             {
@@ -105,15 +105,25 @@ public class ProblemDetailsFactory(
                 ProblemDetails = problemDetails
             }
         );
+
+        var exception = httpContext?.Features.Get<IExceptionHandlerFeature>()?.Error;
+        AddApplicationProblemDetailsExtensions(problemDetails, exception);
     }
 
     /// <summary>
     ///     This is where we add our custom fields to the error body
     /// </summary>
     /// <param name="problemDetails"></param>
-    private static void AddApplicationProblemDetailsExtensions(ProblemDetails problemDetails)
+    private static void AddApplicationProblemDetailsExtensions(
+        ProblemDetails problemDetails,
+        Exception? exception
+    )
     {
-        problemDetails.Extensions["customProperty"] =
-            "Demonstrates ability to add custom properties to the response";
+        if (exception is AppException appException)
+        {
+            problemDetails.Extensions["code"] = appException.Code;
+        }
+
+        problemDetails.Extensions["customProperty"] = "customValue";
     }
 }
