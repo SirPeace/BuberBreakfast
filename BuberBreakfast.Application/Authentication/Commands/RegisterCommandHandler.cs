@@ -1,29 +1,28 @@
+using BuberBreakfast.Application.Authentication.Common;
 using BuberBreakfast.Application.Common.Interfaces;
 using BuberBreakfast.Application.Common.Persistence;
 using BuberBreakfast.Application.Errors.Authentication;
 using BuberBreakfast.Domain.Entities;
+using MediatR;
 
-namespace BuberBreakfast.Application.Services.Authentication;
+namespace BuberBreakfast.Application.Authentication.Commands;
 
-public class AuthenticationService(
-    IJwtTokenGenerator jwtTokenGenerator,
-    IUserRepository userRepository
-) : IAuthenticationService
+public class RegisterCommandHandler(
+    IUserRepository userRepository,
+    IJwtTokenGenerator jwtTokenGenerator
+) : IRequestHandler<RegisterCommand, AuthenticationResult>
 {
-    public AuthenticationResult Login(string email, string password)
+    public async Task<AuthenticationResult> Handle(
+        RegisterCommand request,
+        CancellationToken cancellationToken
+    )
     {
-        var user = userRepository.GetUserByEmail(email);
-
-        if (user is null || password != user.Password)
-            throw new LoginAttemptWithInvalidCredentialsException();
-
-        var token = jwtTokenGenerator.GenerateToken(user);
-        Console.WriteLine($"Logged in as: {email}");
-
-        return new AuthenticationResult(user, token);
+        return await Task.FromResult(
+            Register(request.FirstName, request.LastName, request.Email, request.Password)
+        );
     }
 
-    public AuthenticationResult Register(
+    protected AuthenticationResult Register(
         string firstName,
         string lastName,
         string email,

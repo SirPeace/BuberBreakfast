@@ -1,15 +1,16 @@
 using BuberBreakfast.Application;
 using BuberBreakfast.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
+using BuberBreakfast.WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer().AddSwaggerGen();
-builder.Services.AddApplication().AddInfrastructure(builder.Configuration)
-    .AddSingleton<ProblemDetailsFactory, BuberBreakfast.WebApi.Errors.ProblemDetailsFactory>();
+
+builder.Services.AddApplication().AddInfrastructure(builder.Configuration).AddPresentation();
 
 var app = builder.Build();
-app.UseHttpsRedirection().UseAuthorization().UseExceptionHandler("/error");
+
+app.UseHttpsRedirection();
+app.UseAuthorization();
+app.UseExceptionHandler("/error");
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

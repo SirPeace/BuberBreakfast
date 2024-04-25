@@ -5,14 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Options;
 
-namespace BuberBreakfast.WebApi.Errors;
+namespace BuberBreakfast.WebApi.Common.Errors;
 
 // Source code: https://github.com/dotnet/aspnetcore/blob/main/src/Mvc/Mvc.Core/src/Infrastructure/DefaultProblemDetailsFactory.cs
 /// <summary>
 ///     Copied from Microsoft.AspNetCore.Mvc.Infrastructure.DefaultProblemDetailsFactory.
 ///     This class's purpose is in the new method, which adds custom fields to the error response.
 /// </summary>
-public class ProblemDetailsFactory(
+public class WebApiProblemDetailsFactory(
     IOptions<ApiBehaviorOptions> options,
     IOptions<ProblemDetailsOptions>? problemDetailsOptions = null
 ) : Microsoft.AspNetCore.Mvc.Infrastructure.ProblemDetailsFactory

@@ -8,13 +8,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <PackageReference Include="Mapster" Version="7.4.0" />
+        <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\BuberBreakfast.Contracts\BuberBreakfast.Contracts.csproj"/>
-        <ProjectReference Include="..\BuberBreakfast.Application\BuberBreakfast.Application.csproj"/>
-        <ProjectReference Include="..\BuberBreakfast.Infrastructure\BuberBreakfast.Infrastructure.csproj"/>
+        <ProjectReference Include="..\BuberBreakfast.Contracts\BuberBreakfast.Contracts.csproj" />
+        <ProjectReference Include="..\BuberBreakfast.Application\BuberBreakfast.Application.csproj" />
+        <ProjectReference Include="..\BuberBreakfast.Infrastructure\BuberBreakfast.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
