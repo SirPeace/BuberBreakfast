@@ -1,10 +1,14 @@
+using System.Text;
 using BuberBreakfast.Application.Common.Interfaces;
 using BuberBreakfast.Application.Common.Persistence;
 using BuberBreakfast.Infrastructure.Authentication;
 using BuberBreakfast.Infrastructure.Persistence;
 using BuberBreakfast.Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BuberBreakfast.Infrastructure;
 
@@ -12,15 +16,44 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(
         this IServiceCollection services,
-        ConfigurationManager configuration
+        IConfiguration configuration
     )
     {
-        services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
-
         services
-            .AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>()
+            .AddAuth(configuration)
             .AddSingleton<IDateTimeProvider, DateTimeProvider>()
             .AddScoped<IUserRepository, UserRepository>();
+
+        return services;
+    }
+
+    private static IServiceCollection AddAuth(
+        this IServiceCollection services,
+        IConfiguration configuration
+    )
+    {
+        var jwtSettings = new JwtSettings();
+        configuration.Bind(JwtSettings.SectionName, jwtSettings);
+
+        services.AddSingleton(Options.Create(jwtSettings));
+        services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
+
+        services
+            .AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(opt =>
+                opt.TokenValidationParameters = new()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = jwtSettings.Issuer,
+                    ValidAudience = jwtSettings.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(jwtSettings.Secret)
+                    )
+                }
+            );
 
         return services;
     }

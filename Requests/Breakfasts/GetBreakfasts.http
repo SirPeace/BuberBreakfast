@@ -1,0 +1,5 @@
+@host = http://localhost:5045
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkZWY0ZGIwMi03ZjEzLTQxODgtODhiZC0zNWViZTNmZWIxZTAiLCJnaXZlbl9uYW1lIjoiQWxleCIsImZhbWlseV9uYW1lIjoiS296aHNhc2giLCJqdGkiOiIzOWEwOWEzZC0yZmVlLTQ1ZDktOGIwNi1lZWI4NzJlODJkN2MiLCJleHAiOjE3MTYzMzM3MTQsImlzcyI6IkJ1YmVyRGlubmVyIiwiYXVkIjoiQnViZXJEaW5uZXIifQ.kv7Uj21cj-9LmWPhrpNHhR5YouT8yZwFPfNuf6wPXFo
+
+GET {{host}}/breakfasts HTTP/1.1
+Authorization: Bearer {{token}}

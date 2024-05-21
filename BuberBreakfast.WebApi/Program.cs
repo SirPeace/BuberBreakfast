@@ -9,8 +9,10 @@ builder.Services.AddApplication().AddInfrastructure(builder.Configuration).AddPr
 var app = builder.Build();
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 app.UseExceptionHandler("/error");
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

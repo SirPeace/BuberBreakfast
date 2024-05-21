@@ -1,16 +1,16 @@
-using BuberBreakfast.Application.Authentication.Commands;
 using BuberBreakfast.Application.Authentication.Commands.Register;
 using BuberBreakfast.Application.Authentication.Queries.Login;
 using BuberBreakfast.Contracts.Authentication;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuberBreakfast.WebApi.Controllers;
 
-[ApiController]
 [Route("[controller]")]
-public class AuthController(ISender sender, IMapper mapper) : ControllerBase
+[AllowAnonymous]
+public class AuthController(ISender sender, IMapper mapper) : ApiController
 {
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest requestBody)
