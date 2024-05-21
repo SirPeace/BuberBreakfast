@@ -1,8 +1,10 @@
-﻿namespace BuberBreakfast.Application.Errors.Authentication;
+﻿using BuberBreakfast.Application.Exceptions;
+
+namespace BuberBreakfast.Application.Authentication.Exceptions;
 
 public class LoginAttemptWithInvalidCredentialsException : AppException
 {
-    public override string Code => "Authentication.Login.InvalidCredentials";
+    public override string Code => "Authentication.LoginQuery.InvalidCredentials";
 
     public override Reasons Reason => Reasons.Forbidden;
 

@@ -1,4 +1,5 @@
 using BuberBreakfast.Application.Authentication.Commands;
+using BuberBreakfast.Application.Authentication.Commands.Register;
 using BuberBreakfast.Application.Authentication.Queries.Login;
 using BuberBreakfast.Contracts.Authentication;
 using MapsterMapper;

@@ -1,7 +1,9 @@
 ﻿using System.Net;
-using BuberBreakfast.Application.Errors;
+using BuberBreakfast.Application.Common.Exceptions;
+using BuberBreakfast.Application.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace BuberBreakfast.WebApi.Controllers;
 
@@ -14,6 +16,12 @@ public class ErrorController : ControllerBase
 
         var problem = exception switch
         {
+            AppValidationException e
+                => ValidationProblem(
+                    detail: e.Message,
+                    statusCode: GetHttpCodeFromApplicationException(e),
+                    modelStateDictionary: GetModelStateDictionaryFromValidationException(e)
+                ),
             AppException e
                 => Problem(detail: e.Message, statusCode: GetHttpCodeFromApplicationException(e)),
             _ => Problem()
@@ -36,5 +44,18 @@ public class ErrorController : ControllerBase
                 _ => HttpStatusCode.InternalServerError
             }
         );
+    }
+
+    private static ModelStateDictionary GetModelStateDictionaryFromValidationException(
+        AppValidationException e
+    )
+    {
+        var modelStateDictionary = new ModelStateDictionary();
+
+        foreach (var (key, errors) in e.Errors)
+        foreach (var errorMessage in errors)
+            modelStateDictionary.AddModelError(key, errorMessage);
+
+        return modelStateDictionary;
     }
 }

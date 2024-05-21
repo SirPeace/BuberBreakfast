@@ -1,4 +1,4 @@
-﻿namespace BuberBreakfast.Application.Errors;
+﻿namespace BuberBreakfast.Application.Exceptions;
 
 public abstract class AppException : Exception
 {

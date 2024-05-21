@@ -1,11 +1,12 @@
+using BuberBreakfast.Application.Authentication.Commands.Register;
 using BuberBreakfast.Application.Authentication.Common;
+using BuberBreakfast.Application.Authentication.Exceptions;
 using BuberBreakfast.Application.Common.Interfaces;
 using BuberBreakfast.Application.Common.Persistence;
-using BuberBreakfast.Application.Errors.Authentication;
 using BuberBreakfast.Domain.Entities;
 using MediatR;
 
-namespace BuberBreakfast.Application.Authentication.Commands;
+namespace BuberBreakfast.Application.Authentication.Commands.Register;
 
 public class RegisterCommandHandler(
     IUserRepository userRepository,
@@ -22,7 +23,7 @@ public class RegisterCommandHandler(
         );
     }
 
-    protected AuthenticationResult Register(
+    private AuthenticationResult Register(
         string firstName,
         string lastName,
         string email,

@@ -1,8 +1,10 @@
-﻿namespace BuberBreakfast.Application.Errors.Authentication;
+﻿using BuberBreakfast.Application.Exceptions;
+
+namespace BuberBreakfast.Application.Authentication.Exceptions;
 
 public class RegistrationDuplicateEmailException : AppException
 {
-    public override string Code => "Authentication.Register.DuplicateEmail";
+    public override string Code => "Authentication.RegisterCommand.DuplicateEmail";
 
     public override Reasons Reason => Reasons.Conflict;
 

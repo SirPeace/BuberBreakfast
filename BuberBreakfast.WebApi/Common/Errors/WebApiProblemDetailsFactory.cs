@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
-using BuberBreakfast.Application.Errors;
+using BuberBreakfast.Application.Common.Exceptions;
+using BuberBreakfast.Application.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -113,7 +114,6 @@ public class WebApiProblemDetailsFactory(
     /// <summary>
     ///     This is where we add our custom fields to the error body
     /// </summary>
-    /// <param name="problemDetails"></param>
     private static void AddApplicationProblemDetailsExtensions(
         ProblemDetails problemDetails,
         Exception? exception
@@ -123,7 +123,5 @@ public class WebApiProblemDetailsFactory(
         {
             problemDetails.Extensions["code"] = appException.Code;
         }
-
-        problemDetails.Extensions["customProperty"] = "customValue";
     }
 }
