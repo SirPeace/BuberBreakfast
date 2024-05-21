@@ -1,11 +1,10 @@
 using BuberBreakfast.Application.Authentication.Common;
 using BuberBreakfast.Application.Authentication.Exceptions;
-using BuberBreakfast.Application.Authentication.Queries.Login;
 using BuberBreakfast.Application.Common.Interfaces;
 using BuberBreakfast.Application.Common.Persistence;
 using MediatR;
 
-namespace BuberBreakfast.Application.Authentication.Queries;
+namespace BuberBreakfast.Application.Authentication.Queries.Login;
 
 public class LoginQueryHandler(IUserRepository userRepository, IJwtTokenGenerator jwtTokenGenerator)
     : IRequestHandler<LoginQuery, AuthenticationResult>

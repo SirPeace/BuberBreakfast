@@ -1,4 +1,5 @@
-﻿using BuberBreakfast.Application.Exceptions;
+﻿using BuberBreakfast.Application.Common.Exceptions;
+using BuberBreakfast.Application.Exceptions;
 
 namespace BuberBreakfast.Application.Authentication.Exceptions;
 

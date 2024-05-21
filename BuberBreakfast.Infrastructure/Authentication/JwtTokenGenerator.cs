@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using BuberBreakfast.Application.Common.Interfaces;
 using BuberBreakfast.Domain.Entities;
+using BuberBreakfast.Infrastructure.Authentication.Exceptions;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -23,8 +24,12 @@ public class JwtTokenGenerator(IDateTimeProvider dateTimeProvider, IOptions<JwtS
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
+        var jwtSecret = _jwtSettings.Secret;
+        if (jwtSecret is null)
+            throw new JwtTokenSecretKeyNotFoundException();
+
         var signingCredentials = new SigningCredentials(
-            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Secret)),
+            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
             SecurityAlgorithms.HmacSha256
         );
 

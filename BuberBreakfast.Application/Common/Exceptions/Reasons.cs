@@ -7,5 +7,6 @@ public enum Reasons
     NotFound,
     Conflict,
     FailedValidation,
-    TimeoutExceed
+    TimeoutExceed,
+    MissingConfiguration,
 }
