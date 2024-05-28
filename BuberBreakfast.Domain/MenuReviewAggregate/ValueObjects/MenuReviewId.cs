@@ -1,6 +1,6 @@
-namespace BuberBreakfast.Domain.MenuReview.ValueObjects;
-
 using BuberBreakfast.Domain.Common.Models;
+
+namespace BuberBreakfast.Domain.MenuReviewAggregate.ValueObjects;
 
 public sealed class MenuReviewId(Guid value) : ValueObject
 {

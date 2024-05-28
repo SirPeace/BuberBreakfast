@@ -1,12 +1,12 @@
 using BuberBreakfast.Domain.Common.Models;
 using BuberBreakfast.Domain.Common.ValuesObjects;
 using BuberBreakfast.Domain.Dinner.ValueObjects;
-using BuberBreakfast.Domain.Host.ValueObjects;
-using BuberBreakfast.Domain.Menu.Entities;
-using BuberBreakfast.Domain.Menu.ValueObjects;
-using BuberBreakfast.Domain.MenuReview.ValueObjects;
+using BuberBreakfast.Domain.HostAggregate.ValueObjects;
+using BuberBreakfast.Domain.MenuAggregate.Entities;
+using BuberBreakfast.Domain.MenuAggregate.ValueObjects;
+using BuberBreakfast.Domain.MenuReviewAggregate.ValueObjects;
 
-namespace BuberBreakfast.Domain.Menu;
+namespace BuberBreakfast.Domain.MenuAggregate;
 
 public sealed class Menu : AggregateRoot<MenuId>
 {
