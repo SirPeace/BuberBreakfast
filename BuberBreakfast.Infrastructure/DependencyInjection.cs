@@ -22,7 +22,16 @@ public static class DependencyInjection
         services
             .AddAuth(configuration)
             .AddSingleton<IDateTimeProvider, DateTimeProvider>()
-            .AddScoped<IUserRepository, UserRepository>();
+            .AddPersistence();
+
+        return services;
+    }
+
+    private static IServiceCollection AddPersistence(this IServiceCollection services)
+    {
+        services
+            .AddScoped<IUserRepository, UserRepository>()
+            .AddScoped<IMenuRepository, MenuRepository>();
 
         return services;
     }

@@ -12,4 +12,6 @@ public sealed class MenuId(Guid value) : ValueObject
     {
         yield return Value;
     }
+
+    public static explicit operator Guid(MenuId menuId) => menuId.Value;
 }

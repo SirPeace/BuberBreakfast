@@ -1,11 +1,10 @@
-using BuberBreakfast.Application.Authentication.Commands;
 using BuberBreakfast.Application.Authentication.Commands.Register;
 using BuberBreakfast.Application.Authentication.Common;
 using BuberBreakfast.Application.Authentication.Queries.Login;
 using BuberBreakfast.Contracts.Authentication;
 using Mapster;
 
-namespace BuberBreakfast.WebApi.Common.Mappings;
+namespace BuberBreakfast.WebApi.Mappings;
 
 class AuthenticationMappingConfig : IRegister
 {

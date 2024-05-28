@@ -1,5 +1,5 @@
 using BuberBreakfast.WebApi.Common.Errors;
-using BuberBreakfast.WebApi.Common.Mappings;
+using BuberBreakfast.WebApi.Mappings;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace BuberBreakfast.WebApi;

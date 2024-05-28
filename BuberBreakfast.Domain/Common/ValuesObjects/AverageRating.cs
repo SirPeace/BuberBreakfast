@@ -4,7 +4,7 @@ namespace BuberBreakfast.Domain.Common.ValuesObjects;
 
 public sealed class AverageRating : ValueObject
 {
-    public double Value { get; private set; } = 0.0;
+    public double Value { get; private set; } = 0;
     public int NumRatings { get; private set; } = 0;
 
     private AverageRating() { }
@@ -28,4 +28,6 @@ public sealed class AverageRating : ValueObject
     {
         yield return Value;
     }
+
+    public static explicit operator double(AverageRating rating) => rating.Value;
 }

@@ -2,7 +2,7 @@ using System.Reflection;
 using Mapster;
 using MapsterMapper;
 
-namespace BuberBreakfast.WebApi.Common.Mappings;
+namespace BuberBreakfast.WebApi.Mappings;
 
 public static class DependencyInjection
 {

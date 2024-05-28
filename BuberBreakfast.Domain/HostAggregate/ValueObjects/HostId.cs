@@ -12,4 +12,6 @@ public sealed class HostId(Guid value) : ValueObject
     {
         yield return Value;
     }
+
+    public static explicit operator Guid(HostId hostId) => hostId.Value;
 }

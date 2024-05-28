@@ -12,28 +12,29 @@ public sealed class Menu : AggregateRoot<MenuId>
 {
     public required string Name { get; init; }
     public required string Description { get; init; }
-    public required AverageRating AverageRating { get; init; }
+    public required AverageRating? AverageRating { get; init; }
     public required HostId HostId { get; init; }
     public required DateTime CreatedDateTime { get; init; }
     public required DateTime UpdatedDateTime { get; init; }
 
-    private readonly List<MenuSection> _sections = [];
+    private List<MenuSection> _sections = [];
     public IReadOnlyList<MenuSection> Sections => _sections.AsReadOnly();
 
-    private readonly List<DinnerId> _dinnerIds = [];
+    private List<DinnerId> _dinnerIds = [];
     public IReadOnlyList<DinnerId> DinnerIds => _dinnerIds.AsReadOnly();
 
-    private readonly List<MenuReviewId> _menuReviewIds = [];
+    private List<MenuReviewId> _menuReviewIds = [];
     public IReadOnlyList<MenuReviewId> MenuReviewIds => _menuReviewIds.AsReadOnly();
 
     private Menu(MenuId id)
         : base(id) { }
 
     public static Menu Create(
+        HostId hostId,
         string name,
         string description,
-        AverageRating averageRating,
-        HostId hostId
+        AverageRating? averageRating = null,
+        List<MenuSection>? sections = null
     ) =>
         new(MenuId.CreateUnique())
         {
@@ -43,5 +44,6 @@ public sealed class Menu : AggregateRoot<MenuId>
             HostId = hostId,
             CreatedDateTime = DateTime.UtcNow,
             UpdatedDateTime = DateTime.UtcNow,
+            _sections = sections ?? [],
         };
 }
