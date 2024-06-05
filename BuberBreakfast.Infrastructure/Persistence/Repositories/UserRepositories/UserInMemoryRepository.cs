@@ -1,9 +1,9 @@
 ﻿using BuberBreakfast.Application.Common.Persistence;
 using BuberBreakfast.Domain.Entities;
 
-namespace BuberBreakfast.Infrastructure.Persistence;
+namespace BuberBreakfast.Infrastructure.Persistence.Repositories.UserRepositories;
 
-public class UserRepository : IUserRepository
+public class UserInMemoryRepository : IUserRepository
 {
     private static readonly List<User> Users = [];
 

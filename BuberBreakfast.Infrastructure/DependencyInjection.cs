@@ -3,8 +3,11 @@ using BuberBreakfast.Application.Common.Interfaces;
 using BuberBreakfast.Application.Common.Persistence;
 using BuberBreakfast.Infrastructure.Authentication;
 using BuberBreakfast.Infrastructure.Persistence;
+using BuberBreakfast.Infrastructure.Persistence.Repositories.MenuRepositories;
+using BuberBreakfast.Infrastructure.Persistence.Repositories.UserRepositories;
 using BuberBreakfast.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -20,18 +23,24 @@ public static class DependencyInjection
     )
     {
         services
-            .AddAuth(configuration)
             .AddSingleton<IDateTimeProvider, DateTimeProvider>()
-            .AddPersistence();
+            .AddAuth(configuration)
+            .AddPersistence(configuration);
 
         return services;
     }
 
-    private static IServiceCollection AddPersistence(this IServiceCollection services)
+    private static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
+        var connectionString = configuration
+            .GetSection("SqlServer")
+            .GetValue<string>("ConnectionString");
+        
+        services.AddDbContext<BuberBreakfastDbContext>(opt => opt.UseSqlServer(connectionString));
+
         services
-            .AddScoped<IUserRepository, UserRepository>()
-            .AddScoped<IMenuRepository, MenuRepository>();
+            .AddScoped<IUserRepository, UserInMemoryRepository>()
+            .AddScoped<IMenuRepository, MenuEFRepository>();
 
         return services;
     }

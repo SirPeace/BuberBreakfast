@@ -26,9 +26,8 @@ public class CreateMenuCommandHandler(IMenuRepository menuRepository)
             )
         );
 
-        menuRepository.Add(menu);
+        await menuRepository.Add(menu);
 
-        await Task.CompletedTask;
         return menu;
     }
 }

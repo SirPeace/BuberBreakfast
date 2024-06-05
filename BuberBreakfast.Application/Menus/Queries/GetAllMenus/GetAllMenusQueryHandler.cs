@@ -12,9 +12,6 @@ public class GetAllMenusQueryHandler(IMenuRepository menuRepository)
         CancellationToken cancellationToken
     )
     {
-        await Task.CompletedTask;
-        var allMenus = menuRepository.GetAllOfHost(request.HostId);
-
-        return allMenus;
+        return await menuRepository.GetAllOfHost(request.HostId);
     }
 }

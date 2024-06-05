@@ -1,6 +1,6 @@
+using BuberBreakfast.Domain.BreakfastAggregate.ValueObjects;
 using BuberBreakfast.Domain.Common.Models;
 using BuberBreakfast.Domain.Common.ValuesObjects;
-using BuberBreakfast.Domain.Dinner.ValueObjects;
 using BuberBreakfast.Domain.HostAggregate.ValueObjects;
 using BuberBreakfast.Domain.MenuAggregate.Entities;
 using BuberBreakfast.Domain.MenuAggregate.ValueObjects;
@@ -17,14 +17,14 @@ public sealed class Menu : AggregateRoot<MenuId>
     public required DateTime CreatedDateTime { get; init; }
     public required DateTime UpdatedDateTime { get; init; }
 
-    private List<MenuSection> _sections = [];
     public IReadOnlyList<MenuSection> Sections => _sections.AsReadOnly();
+    private List<MenuSection> _sections = [];
 
-    private List<DinnerId> _dinnerIds = [];
-    public IReadOnlyList<DinnerId> DinnerIds => _dinnerIds.AsReadOnly();
+    public IReadOnlyList<BreakfastId> BreakfastIds => _breakfastIds.AsReadOnly();
+    private List<BreakfastId> _breakfastIds = [];
 
-    private List<MenuReviewId> _menuReviewIds = [];
     public IReadOnlyList<MenuReviewId> MenuReviewIds => _menuReviewIds.AsReadOnly();
+    private List<MenuReviewId> _menuReviewIds = [];
 
     private Menu(MenuId id)
         : base(id) { }

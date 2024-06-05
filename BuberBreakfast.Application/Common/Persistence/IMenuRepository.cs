@@ -4,6 +4,6 @@ namespace BuberBreakfast.Application.Common.Persistence;
 
 public interface IMenuRepository
 {
-    public void Add(Menu menu);
-    public IEnumerable<Menu> GetAllOfHost(Guid hostId);
+    public Task Add(Menu menu);
+    public Task<IEnumerable<Menu>> GetAllOfHost(Guid hostId);
 }
