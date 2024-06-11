@@ -1,4 +1,5 @@
 using System.Reflection;
+using BuberBreakfast.Domain.HostAggregate;
 using BuberBreakfast.Domain.MenuAggregate;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ public class BuberBreakfastDbContext(DbContextOptions<BuberBreakfastDbContext> o
     : DbContext(options)
 {
     public required DbSet<Menu> Menus { get; init; }
+    public required DbSet<Host> Hosts { get; init; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
